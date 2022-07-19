@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="library.js" defer></script>
+    <title>library</title>
+</head>
+<body>
+    <header>
+        <h1>The Ancient Library of Today</h1>
+    </header>
+    <div class="newBookBtn">
+        <button id="newBookBtn">New book</button>
+    </div>
+    <div class="formContainer">
+        <form action="" method="post" id="bookForm">  
+            <p>
+                <label for="title">
+                    <span>Title</span>
+                    <input type="text" id="title" name="bookTitle" required>
+                </label>
+            </p>
+            <p>
+                <label for="author">
+                    <span>Author</span>
+                    <input type="text" id="author" name="bookAuthor" required>
+                </label>
+            </p>
+            <p>
+                <label for="pages">
+                    <span>Pages</span>
+                    <input type="number" id="pages" name="bookPages" required>
+                </label>
+            </p>
+            <ul>
+                <li>
+                    <label for="read">
+                        <input type="radio" name="isRead" id="read" value="Read">
+                        Read
+                    </label>
+                </li>
+                <li>
+                    <label for="notRead">
+                        <input type="radio" name="isRead" id="notRead" value="Not read yet" checked>
+                        Not read yet
+                    </label>
+                </li>
+            </ul>
+            <p>
+                <label for="notes">
+                    <span>Notes</span>
+                    <textarea id="notes" name="bookNotes"></textarea>
+                </label>
+            </p>
+            <p>
+                <button id="submitForm">Add book to library</button>
+            </p>
+        </form>
+    </div>
+    <div id="table-container">
+        <table id="table">
+            <thead>
+                <td>Title</td>
+                <td>Author</td>
+                <td>Pages</td>
+                <td>Read</td>
+                <td>Notes</td>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

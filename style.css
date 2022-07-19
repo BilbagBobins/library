@@ -1,0 +1,20 @@
+table {
+    width: auto;
+    height: auto;
+    border: 1px solid black;
+}
+
+thead {
+    font-weight: bold;
+}
+
+td {
+    border: 1px solid black;
+    min-width: 150px;
+    height: 2em;
+    text-align: center;
+}
+
+.formContainer{
+    display: none;
+}
