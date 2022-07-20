@@ -18,3 +18,15 @@ td {
 .formContainer{
     display: none;
 }
+
+.bookPage {
+    width: 250px;
+    border: 1px solid black;
+}
+
+#page-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 250px);
+    grid-template-rows: repeat(2, 1fr);
+}

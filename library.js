@@ -26,11 +26,24 @@ addBookToLibrary('The Martian', 'Andy Weir', '369', 'Read', 'Apollo 13 crisis fo
 addBookToLibrary('Dune', 'Frank Herbert', '412', 'Not yet read')
 
 function bookTable() {
-    const table = document.querySelector('#table tbody');
-    table.innerHTML = '';
+    tableContainer.innerHTML = '';
+    pageContainer.innerHTML = '';
+    viewIndicator = 'table';
 
+    const table = document.createElement('table');
+    
+    const thead = table.createTHead();
+    const headRow = thead.insertRow(0);
+    const keys = Object.keys(myLibrary[0]);
+
+    for (i = 0; i < keys.length -1; i++){
+        const td = headRow.insertCell();
+        td.appendChild(document.createTextNode(keys[i]));
+    }
+
+    const tbody = table.createTBody();
     myLibrary.forEach(element => {
-        const tr = table.insertRow();
+        const tr = tbody.insertRow();
         let book = Object.values(element);
         for (i = 0; i < book.length -1; i++) {
             const td = tr.insertCell();
@@ -47,13 +60,51 @@ function bookTable() {
                 td.appendChild(document.createTextNode(book[i]))
             }                     
         }
-
         const td = tr.insertCell();
         const delButton = document.createElement('button');
         delButton.textContent = 'Delete';
         delButton.setAttribute('id', element.index);
         delButton.addEventListener('click', remove);
         td.appendChild(delButton);
+    })
+    tableContainer.appendChild(table);
+}
+
+function bookPage() {
+    viewIndicator = 'page';
+    tableContainer.innerHTML = '';
+    pageContainer.innerHTML = '';
+
+    myLibrary.forEach(element => {
+        const page = document.createElement('div');
+        page.setAttribute('class', 'bookPage');
+        let bookValue = Object.values(element);
+        let bookKey = Object.keys(element);
+        for (i = 0; i < bookValue.length -1; i++) {
+            const key = document.createElement('h3');
+            key.textContent = bookKey[i][0].toUpperCase() + bookKey[i].substring(1);
+            page.appendChild(key);
+
+            const value = document.createElement('p');
+            value.textContent = bookValue[i];
+            if (key.textContent === 'Read') {  
+                const readButton = document.createElement('button');
+                readButton.textContent = 'Read it';
+                readButton.setAttribute('id', bookValue[5]);
+                readButton.addEventListener('click', readBook);
+                page.appendChild(value);
+                page.appendChild(readButton);
+            } else {
+                page.appendChild(value);
+            }
+        }
+        const delButton = document.createElement('button');
+        delButton.textContent = 'Delete';
+        delButton.setAttribute('id', element.index);
+        delButton.addEventListener('click', remove);
+        page.appendChild(delButton);
+
+        pageContainer.appendChild(page);
     })
 }
 
@@ -68,12 +119,15 @@ function submit(event) {
     bookForm.reset();
     formContainer.style.display = 'none';
     newBook.style.display = 'block';
-    bookTable();
+    if (viewIndicator === 'table') {
+
+    }
+    viewModeRefresh();
 }
 
 function remove() {
     myLibrary = myLibrary.filter(book => book.index != this.id)
-    bookTable();
+    viewModeRefresh();
 }
 
 function readBook() {
@@ -88,7 +142,23 @@ function readBook() {
 
     myLibrary[bookIndex] = book[0];
 
-    bookTable();
+    viewModeRefresh();
+}
+
+function viewModeSwitch() {
+    if (viewIndicator === 'table') {
+        bookPage();
+    } else if (viewIndicator === 'page') {
+        bookTable();
+    }
+}
+
+function viewModeRefresh() {
+    if (viewIndicator === 'page') {
+        bookPage();
+    } else if (viewIndicator === 'table') {
+        bookTable();
+    }
 }
 
 const bookForm = document.getElementById('bookForm');
@@ -102,5 +172,10 @@ newBook.addEventListener('click', () => {
 const submitBook = document.getElementById('submitForm');
 submitBook.addEventListener('click', submit);
 
+let viewIndicator = '';
+const viewMode = document.getElementById('viewMode').addEventListener('click', viewModeSwitch);
+
+const tableContainer = document.getElementById('table-container');
+const pageContainer = document.getElementById('page-container');
 
 bookTable();
