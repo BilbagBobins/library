@@ -5,6 +5,17 @@ body {
     font-family: sans-serif;
 }
 
+.bgImage img {
+    position: absolute;
+    height: 100px;
+}
+
+:root {
+    --tablebutton-color: rgba(182, 173, 230, 0.548);
+    --tablebutton-hover: yellow;
+    --formbutton-color: aquamarine;
+}
+
 .button-container {
     display: flex;
     margin-bottom: 15px;
@@ -16,21 +27,30 @@ body {
 } 
 
 .button-container > *,
-.submit-container > *,
-table button {
+.submit-container > * {
     height: 30px;
     border: none;
     border-radius: 10px;
-    background-color: aquamarine
+    background-color: var(--formbutton-color)
 }
 
+.button-container > *:hover,
+.submit-container > *:hover {
+    background-color: rgb(51, 230, 170);
+}
+
+.button-container > *:active,
+.submit-container > *:active {
+    transform: scale(0.95);
+}
 
 .formContainer{
     display: none;
     padding: 10px;
     background-color: bisque;
     border-radius: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 7px rgba(95, 95, 95, 0.3);
 }
 
 #bookForm {
@@ -62,6 +82,11 @@ table button {
     height: 10px;
 }
 
+#bookForm textarea {
+    height: 100px;
+    resize: vertical;
+}
+
 #bookForm input:invalid {
     border: 1px dashed hotpink;
 }
@@ -74,9 +99,9 @@ table button {
     position: relative;
     content: '*Required';
     left: 195px;
-    top: -37px;
+    top: -36px;
     color: red;
-
+    font-size: 15px;
 }
 
 ul {
@@ -90,44 +115,75 @@ ul {
     padding: 0 20px;
 }
 
+#table-container {
+    width: 95%;
+    max-width: 1222px;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 5px 7px rgba(95, 95, 95, 0.3);
+}
+
 table {
-    width: auto;
+    width: 100%;
     height: auto;
     background-color: white;
     border-collapse: collapse;
 }
 
-table tr {
-    /* border-bottom: 1px solid red; */
-}
-
-table tr:nth-child(odd) {
-    background-color: lightgrey;
-   
-}
-
-table button {
-    padding: 0 10px;
-}
-
 thead td {
     font-weight: bold;
-    background-color: white;
 }
 
 td {
-    min-width: 150px;
+    min-width: 100px;
+    max-width: 350px;
     height: 2em;
+    padding: 5px 10px;
     text-align: center;
+    vertical-align: middle;
 }
 
+table tbody td  {
+    min-height: 3em;
+}
 
+table tbody td:nth-child(4) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    min-width: 180px;
+}
 
-.bookPage {
-    width: 220px;
-    border: 1px solid black;
-    border-radius: 15px;
-    padding: 10px;
+table tbody tr:nth-child(odd) {
+    background-color: lightgrey;
+}
+
+table tbody tr:hover {
+    background-color: rgb(228, 212, 192);
+}
+
+.readButton,
+.delButton {
+    border: none;
+    height: 2em;
+    width: 5em;
+    background-color: var(--tablebutton-color);
+    border-radius: 5px;
+}
+
+.readButton:hover {
+    background-color: var(--tablebutton-hover);
+}
+
+.delButton:hover {
+    background-color: rgb(255, 0, 64);
+    color: white;
+}
+
+.readButton:active,
+.delButton:active {
+    transform: scale(0.95);
 }
 
 #page-container {
@@ -136,5 +192,40 @@ td {
     grid-template-columns: repeat(auto-fit, 240px);
     grid-template-rows: repeat(2, 1fr);
     justify-content: center;
-    gap: 10px;
+    gap: 25px;
+}
+
+.bookPage {
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    padding: 10px 20px;
+    background-image: url(img/paper3.jpg);
+    background-color: cornsilk;
+    box-shadow: 0 5px 7px rgba(95, 95, 95, 0.3);
+}
+
+.bookPage h3,
+.bookPage p {
+    margin: 5px;
+}
+
+.bookPage > *:nth-child(even) {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid brown;
+}
+
+.bookPage > *:nth-child(10) {
+    border: none;
+}
+
+.bookPage div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bookPage .delButton {
+    margin-top: auto;
+    width: 100%;
 }

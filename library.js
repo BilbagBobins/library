@@ -22,8 +22,9 @@ function addBookToLibrary(title, author, pages, read, notes) {
 
 addBookToLibrary('The Hobbit', 'J.R.R. Tolkien', '295', 'Not read yet');
 addBookToLibrary('World War Z', 'Max Brooks', '342', 'Read', 'good book, doesn\'t resemble film');
+addBookToLibrary('Dune', 'Frank Herbert', '412', 'Not yet read', 'really really long notes section that may or may not fit withing the allocated space and may or may not make things look janky as a really janky thing')
+addBookToLibrary('Really really long title that may or may not fit withing the allocated space and may or may not make things look janky as', 'CatDog', '555', 'Not yet read', 'Notey notes')
 addBookToLibrary('The Martian', 'Andy Weir', '369', 'Read', 'Apollo 13 crisis for the entire book');
-addBookToLibrary('Dune', 'Frank Herbert', '412', 'Not yet read')
 
 function bookTable() {
     tableContainer.innerHTML = '';
@@ -56,6 +57,7 @@ function bookTable() {
                     const readButton = document.createElement('button');
                     readButton.textContent = 'Read it';
                     readButton.setAttribute('id', element.index);
+                    readButton.setAttribute('class', 'readButton');
                     readButton.addEventListener('click', readBook);
                     td.appendChild(document.createTextNode(book[i]));
                     td.appendChild(readButton);
@@ -67,6 +69,7 @@ function bookTable() {
             const delButton = document.createElement('button');
             delButton.textContent = 'Delete';
             delButton.setAttribute('id', element.index);
+            delButton.setAttribute('class', 'delButton');
             delButton.addEventListener('click', remove);
             td.appendChild(delButton);
         })
@@ -94,12 +97,15 @@ function bookPage() {
             const value = document.createElement('p');
             value.textContent = bookValue[i];
             if (key.textContent === 'Read') {  
+                const readDiv = document.createElement('div');
                 const readButton = document.createElement('button');
                 readButton.textContent = 'Read it';
                 readButton.setAttribute('id', bookValue[5]);
+                readButton.setAttribute('class', 'readButton');
                 readButton.addEventListener('click', readBook);
-                page.appendChild(value);
-                page.appendChild(readButton);
+                readDiv.appendChild(value);
+                readDiv.appendChild(readButton);
+                page.appendChild(readDiv);
             } else {
                 page.appendChild(value);
             }
@@ -107,6 +113,7 @@ function bookPage() {
         const delButton = document.createElement('button');
         delButton.textContent = 'Delete';
         delButton.setAttribute('id', element.index);
+        delButton.setAttribute('class', 'delButton');
         delButton.addEventListener('click', remove);
         page.appendChild(delButton);
 
@@ -196,4 +203,4 @@ const viewMode = document.getElementById('viewMode').addEventListener('click', v
 const tableContainer = document.getElementById('table-container');
 const pageContainer = document.getElementById('page-container');
 
-bookTable();
+bookPage();
