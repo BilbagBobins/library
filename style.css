@@ -1,32 +1,140 @@
+body {
+    background-color: rgb(236, 233, 228);
+    display: grid;
+    justify-items: center;
+    font-family: sans-serif;
+}
+
+.button-container {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.button-container > * {
+    width: 100px;
+    margin: 0 10px;
+} 
+
+.button-container > *,
+.submit-container > *,
+table button {
+    height: 30px;
+    border: none;
+    border-radius: 10px;
+    background-color: aquamarine
+}
+
+
+.formContainer{
+    display: none;
+    padding: 10px;
+    background-color: bisque;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+#bookForm {
+    display: grid;
+    justify-content: center;
+    gap: 10px;
+}
+
+#bookForm input {
+    height: 20px;
+}
+
+#bookForm input,
+#bookForm textarea {
+    border: none;
+    border-radius: 5px;
+    padding: 5px 0 5px 10px;
+}
+
+#bookForm input:focus-visible,
+#bookForm textarea:focus-visible {
+    outline: none;
+    background-color: lightblue;
+} 
+
+
+#bookForm #read,
+#bookForm #notRead {
+    height: 10px;
+}
+
+#bookForm input:invalid {
+    border: 1px dashed hotpink;
+}
+
+#bookForm span {
+    height: 0;
+}
+
+#bookForm input:invalid + span::after {
+    position: relative;
+    content: '*Required';
+    left: 195px;
+    top: -37px;
+    color: red;
+
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.submit-container > * {
+    margin: 10px 10px 0;
+    padding: 0 20px;
+}
+
 table {
     width: auto;
     height: auto;
-    border: 1px solid black;
+    background-color: white;
+    border-collapse: collapse;
 }
 
-thead {
+table tr {
+    /* border-bottom: 1px solid red; */
+}
+
+table tr:nth-child(odd) {
+    background-color: lightgrey;
+   
+}
+
+table button {
+    padding: 0 10px;
+}
+
+thead td {
     font-weight: bold;
+    background-color: white;
 }
 
 td {
-    border: 1px solid black;
     min-width: 150px;
     height: 2em;
     text-align: center;
 }
 
-.formContainer{
-    display: none;
-}
+
 
 .bookPage {
-    width: 250px;
+    width: 220px;
     border: 1px solid black;
+    border-radius: 15px;
+    padding: 10px;
 }
 
 #page-container {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, 250px);
+    grid-template-columns: repeat(auto-fit, 240px);
     grid-template-rows: repeat(2, 1fr);
+    justify-content: center;
+    gap: 10px;
 }

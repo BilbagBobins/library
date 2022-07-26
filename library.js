@@ -34,40 +34,46 @@ function bookTable() {
     
     const thead = table.createTHead();
     const headRow = thead.insertRow(0);
-    const keys = Object.keys(myLibrary[0]);
 
-    for (i = 0; i < keys.length -1; i++){
-        const td = headRow.insertCell();
-        td.appendChild(document.createTextNode(keys[i]));
-    }
+    if (myLibrary[0]) {
+        const keys = Object.keys(myLibrary[0]);
 
-    const tbody = table.createTBody();
-    myLibrary.forEach(element => {
-        const tr = tbody.insertRow();
-        let book = Object.values(element);
-        for (i = 0; i < book.length -1; i++) {
-            const td = tr.insertCell();
-            if (book[i] === book[3]) { 
-                //  would have used book.read but I am iterating through values only
-
-                const readButton = document.createElement('button');
-                readButton.textContent = 'Read it';
-                readButton.setAttribute('id', element.index);
-                readButton.addEventListener('click', readBook);
-                td.appendChild(document.createTextNode(book[i]));
-                td.appendChild(readButton);
-            } else {
-                td.appendChild(document.createTextNode(book[i]))
-            }                     
+        for (i = 0; i < keys.length -1; i++){
+            const td = headRow.insertCell();
+            keyCap = keys[i][0].toUpperCase() + keys[i].substring(1);
+            td.appendChild(document.createTextNode(keyCap));
         }
-        const td = tr.insertCell();
-        const delButton = document.createElement('button');
-        delButton.textContent = 'Delete';
-        delButton.setAttribute('id', element.index);
-        delButton.addEventListener('click', remove);
-        td.appendChild(delButton);
-    })
-    tableContainer.appendChild(table);
+
+        const tbody = table.createTBody();
+        myLibrary.forEach(element => {
+            const tr = tbody.insertRow();
+            let book = Object.values(element);
+            for (i = 0; i < book.length -1; i++) {
+                const td = tr.insertCell();
+                if (book[i] === book[3]) { 
+                    //  would have used book.read but I am iterating through values only
+
+                    const readButton = document.createElement('button');
+                    readButton.textContent = 'Read it';
+                    readButton.setAttribute('id', element.index);
+                    readButton.addEventListener('click', readBook);
+                    td.appendChild(document.createTextNode(book[i]));
+                    td.appendChild(readButton);
+                } else {
+                    td.appendChild(document.createTextNode(book[i]))
+                }                     
+            }
+            const td = tr.insertCell();
+            const delButton = document.createElement('button');
+            delButton.textContent = 'Delete';
+            delButton.setAttribute('id', element.index);
+            delButton.addEventListener('click', remove);
+            td.appendChild(delButton);
+        })
+        tableContainer.appendChild(table);
+    } else {
+        tableContainer.innerHTML = '';
+    }
 }
 
 function bookPage() {
@@ -115,14 +121,24 @@ function submit(event) {
     const pages = document.getElementById('pages').value;
     const read = document.querySelector('input[name="isRead"]:checked').value;
     const notes = document.getElementById('notes').value;
-    addBookToLibrary(title, author, pages, read, notes);
+    if (title && author && pages) {
+        addBookToLibrary(title, author, pages, read, notes);
+        bookForm.reset();
+        formContainer.style.display = 'none';
+        newBook.style.display = 'block';
+        if (viewIndicator === 'table') {
+
+        }
+        viewModeRefresh();
+    } else {
+        alert('Fill out Title, Author and Pages');
+    }
+}
+
+function cancelBook() {
     bookForm.reset();
     formContainer.style.display = 'none';
     newBook.style.display = 'block';
-    if (viewIndicator === 'table') {
-
-    }
-    viewModeRefresh();
 }
 
 function remove() {
@@ -171,6 +187,8 @@ newBook.addEventListener('click', () => {
 
 const submitBook = document.getElementById('submitForm');
 submitBook.addEventListener('click', submit);
+const cancelForm = document.getElementById('cancelForm');
+cancelForm.addEventListener('click', cancelBook);
 
 let viewIndicator = '';
 const viewMode = document.getElementById('viewMode').addEventListener('click', viewModeSwitch);
