@@ -1,19 +1,41 @@
 body {
     background-color: rgb(236, 233, 228);
-    display: grid;
-    justify-items: center;
     font-family: sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
-.bgImage img {
+.bg {
+    background-image: url(img/library.jpg);
     position: absolute;
-    height: 100px;
+    width: 100%;
+    min-height: 100%;
+    height: fit-content;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: 0 -75px;
+    display: flex;
+    flex-direction: column;
+}
+
+.library {
+    display: grid;
+    justify-items: center;
 }
 
 :root {
-    --tablebutton-color: rgba(182, 173, 230, 0.548);
-    --tablebutton-hover: yellow;
-    --formbutton-color: aquamarine;
+    --heading-color: #f6ae2d;
+    --tablebutton-color: blueviolet;
+    --tablebutton-hover: deepskyblue;
+    --formbutton-color: #953c19;
+}
+
+header h1 {
+    background-color: var(--heading-color);
+    padding: 10px 30px;
+    border-radius: 10px;
+    color: white;
 }
 
 .button-container {
@@ -28,15 +50,18 @@ body {
 
 .button-container > *,
 .submit-container > * {
+    font-size: 1em;
     height: 30px;
     border: none;
     border-radius: 10px;
-    background-color: var(--formbutton-color)
+    background-color: var(--formbutton-color);
+    color: white;
 }
 
 .button-container > *:hover,
 .submit-container > *:hover {
-    background-color: rgb(51, 230, 170);
+    background-color: var(--heading-color);
+    color: black;
 }
 
 .button-container > *:active,
@@ -50,7 +75,7 @@ body {
     background-color: bisque;
     border-radius: 10px;
     margin-bottom: 30px;
-    box-shadow: 0 5px 7px rgba(95, 95, 95, 0.3);
+    box-shadow: 6px 6px 10px 1px rgb(0 0 0 / 65%);
 }
 
 #bookForm {
@@ -120,13 +145,13 @@ ul {
     max-width: 1222px;
     display: flex;
     justify-content: center;
-    box-shadow: 0 5px 7px rgba(95, 95, 95, 0.3);
+    box-shadow: 6px 6px 10px 1px rgb(0 0 0 / 65%);
 }
 
 table {
     width: 100%;
     height: auto;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.95);
     border-collapse: collapse;
 }
 
@@ -156,7 +181,7 @@ table tbody td:nth-child(4) {
 }
 
 table tbody tr:nth-child(odd) {
-    background-color: lightgrey;
+    background-color: rgba(211, 211, 211, 0.6);
 }
 
 table tbody tr:hover {
@@ -169,11 +194,13 @@ table tbody tr:hover {
     height: 2em;
     width: 5em;
     background-color: var(--tablebutton-color);
+    color: white;
     border-radius: 5px;
 }
 
 .readButton:hover {
-    background-color: var(--tablebutton-hover);
+    background-color: var(--heading-color);
+    color: black;
 }
 
 .delButton:hover {
@@ -202,7 +229,7 @@ table tbody tr:hover {
     padding: 10px 20px;
     background-image: url(img/paper3.jpg);
     background-color: cornsilk;
-    box-shadow: 0 5px 7px rgba(95, 95, 95, 0.3);
+    box-shadow: 6px 6px 10px 1px rgb(0 0 0 / 65%);
 }
 
 .bookPage h3,
@@ -229,3 +256,16 @@ table tbody tr:hover {
     margin-top: auto;
     width: 100%;
 }
+
+footer {
+    color: white;
+    align-self: center;
+    margin-top: auto;
+    margin-bottom: 20px;
+}
+
+/* TODO
+fix background image size when there's a scroll bar 
+get fonts
+footer on page view when only one row
+fade out of page delete */
