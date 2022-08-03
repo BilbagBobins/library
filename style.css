@@ -1,6 +1,6 @@
 body {
     background-color: rgb(236, 233, 228);
-    font-family: sans-serif;
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
 }
@@ -35,7 +35,19 @@ header h1 {
     background-color: var(--heading-color);
     padding: 10px 30px;
     border-radius: 10px;
-    color: white;
+    color: #700000;
+}
+
+header h1,
+.bookPage h3,
+table thead {
+    font-family: "Merriweather";
+}
+
+button {
+    font-family: 'Roboto', sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
 .button-container {
@@ -45,12 +57,12 @@ header h1 {
 
 .button-container > * {
     width: 100px;
-    margin: 0 10px;
+    margin: 0 35px;
 } 
 
 .button-container > *,
 .submit-container > * {
-    font-size: 1em;
+    font-size: .85em;
     height: 30px;
     border: none;
     border-radius: 10px;
@@ -70,12 +82,14 @@ header h1 {
 }
 
 .formContainer{
+    opacity: 0;
     display: none;
     padding: 10px;
     background-color: bisque;
     border-radius: 10px;
     margin-bottom: 30px;
     box-shadow: 6px 6px 10px 1px rgb(0 0 0 / 65%);
+    transition: .6s ease opacity;
 }
 
 #bookForm {
@@ -123,7 +137,7 @@ header h1 {
 #bookForm input:invalid + span::after {
     position: relative;
     content: '*Required';
-    left: 195px;
+    left: 230px;
     top: -36px;
     color: red;
     font-size: 15px;
@@ -145,7 +159,8 @@ ul {
     max-width: 1222px;
     display: flex;
     justify-content: center;
-    box-shadow: 6px 6px 10px 1px rgb(0 0 0 / 65%);
+    opacity: 0;
+    transition: .3s ease opacity;
 }
 
 table {
@@ -153,6 +168,7 @@ table {
     height: auto;
     background-color: rgba(255, 255, 255, 0.95);
     border-collapse: collapse;
+    box-shadow: 6px 6px 10px 1px rgb(0 0 0 / 65%);
 }
 
 thead td {
@@ -217,9 +233,9 @@ table tbody tr:hover {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fit, 240px);
-    grid-template-rows: repeat(2, 1fr);
     justify-content: center;
     gap: 25px;
+    transition: .6s ease opacity;
 }
 
 .bookPage {
@@ -230,11 +246,16 @@ table tbody tr:hover {
     background-image: url(img/paper3.jpg);
     background-color: cornsilk;
     box-shadow: 6px 6px 10px 1px rgb(0 0 0 / 65%);
+    transition: 1s ease opacity;
 }
 
 .bookPage h3,
 .bookPage p {
     margin: 5px;
+}
+
+.bookPage h3 {
+    font-size: 1.05em;
 }
 
 .bookPage > *:nth-child(even) {
@@ -264,8 +285,9 @@ footer {
     margin-bottom: 20px;
 }
 
+
 /* TODO
-fix background image size when there's a scroll bar 
+
 get fonts
-footer on page view when only one row
+
 fade out of page delete */

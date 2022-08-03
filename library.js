@@ -27,6 +27,7 @@ addBookToLibrary('Really really long title that may or may not fit withing the a
 addBookToLibrary('The Martian', 'Andy Weir', '369', 'Read', 'Apollo 13 crisis for the entire book');
 
 function bookTable() {
+    tableContainer.style.opacity = 1;
     tableContainer.innerHTML = '';
     pageContainer.innerHTML = '';
     viewIndicator = 'table';
@@ -81,6 +82,7 @@ function bookTable() {
 
 function bookPage() {
     viewIndicator = 'page';
+    pageContainer.style.opacity = 1;
     tableContainer.innerHTML = '';
     pageContainer.innerHTML = '';
 
@@ -144,13 +146,22 @@ function submit(event) {
 
 function cancelBook() {
     bookForm.reset();
-    formContainer.style.display = 'none';
-    newBook.style.display = 'block';
+    formContainer.style.opacity = 0;
+    setTimeout(() => {
+        formContainer.style.display = 'none';
+        newBook.style.display = 'block';
+    }, 400);
 }
 
 function remove() {
     myLibrary = myLibrary.filter(book => book.index != this.id)
-    viewModeRefresh();
+    this.parentNode.style.opacity = 0;
+    setTimeout( () => {
+        setTimeout(() => {
+            viewModeRefresh();
+        }, 1);
+        this.parentNode.style.display = 'none';
+    }, 500);   
 }
 
 function readBook() {
@@ -170,9 +181,17 @@ function readBook() {
 
 function viewModeSwitch() {
     if (viewIndicator === 'table') {
-        bookPage();
+        viewMode.textContent = 'table view';
+        tableContainer.style.opacity = 0;
+        setTimeout(() => {
+            bookPage()
+        }, 300);
     } else if (viewIndicator === 'page') {
-        bookTable();
+        viewMode.textContent = 'page view';
+        pageContainer.style.opacity = 0;
+        setTimeout(() => {
+            bookTable()
+        }, 300);
     }
 }
 
@@ -189,6 +208,10 @@ const formContainer = document.querySelector('.formContainer');
 const newBook = document.getElementById('newBookBtn')
 newBook.addEventListener('click', () => {
     formContainer.style.display = 'block';
+    setTimeout(() => {
+        formContainer.style.opacity = 1;
+    }, 1);
+    
     newBook.style.display = 'none';
 });
 
@@ -198,7 +221,8 @@ const cancelForm = document.getElementById('cancelForm');
 cancelForm.addEventListener('click', cancelBook);
 
 let viewIndicator = '';
-const viewMode = document.getElementById('viewMode').addEventListener('click', viewModeSwitch);
+const viewMode = document.getElementById('viewMode')
+viewMode.addEventListener('click', viewModeSwitch);
 
 const tableContainer = document.getElementById('table-container');
 const pageContainer = document.getElementById('page-container');
